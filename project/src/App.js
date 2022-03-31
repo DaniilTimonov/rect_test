@@ -1,9 +1,16 @@
 import React from 'react';
 
 function App() {
+  let likes = 5;
+  function Increment() {
+    likes += 1;
+    console.log(likes);
+  }
   return (
     <div className="App">
-      
+      <h1>{likes}</h1>
+     <button onClick={Increment}> Increment </button>
+     <button onClick={() => likes -= 1}>  Decrement </button> 
     </div>
   );
 }
