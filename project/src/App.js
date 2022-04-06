@@ -3,6 +3,7 @@ import ClassCounter from './components/ClassCounter';
 import Counter from './components/counter';
 import './styles/App.css';
 import PostItem from './components/Postitem';
+import PostList from './components/PostList';
 
 function App() {
 const [posts, setPosts] = useState([
@@ -13,13 +14,10 @@ const [posts, setPosts] = useState([
 
 ])
 
-//test
+
   return (
     <div className="App">
-{posts.map(post =>
-<div> Post </div>
-)}
-
+<PostList posts={posts}/>
 </div>
  );
 }
