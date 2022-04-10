@@ -5,7 +5,8 @@ import './styles/App.css';
 import PostItem from './components/Postitem';
 import PostList from './components/PostList';
 import MyButton from './components/UI/button/MyButton';
-import MyInput from './components/UI/button/input/MyInput';
+import MyInput from './components/input/MyInput';
+import {useRef} from 'react';
 
 function App() {
 const [posts, setPosts] = useState([
@@ -19,9 +20,13 @@ const [posts2, setPosts2] = useState([
   {id:3, title:'Python 3', body:'Description'},
  ])
 
-const [title, setTitle] = useState('deff' )
+const [title, setTitle] = useState('' )
+const [body, setBody] = useState('' )
 
-const addNewPost = () => {
+
+const addNewPost = (e) => {
+  e.preventDefault();
+     console.log(title);
      
 }
 
@@ -31,10 +36,17 @@ const addNewPost = () => {
   <form>
     {/*Управляемый компонент*/}
     <MyInput
+
     value={title}
     onChange = {e => setTitle(e.target.value)}
     type="text" placeholder="Название поста"/>
-    <MyInput type="text" placeholder="Описание поста"/>
+
+  {/* неуправляемый неконтроллируемый компонент */}
+{    <MyInput
+     value={title}
+     onChange = {e => setTitle(e.target.value)}
+     type="text"
+      placeholder="Описание поста"/> }
     <MyButton onClick = {addNewPost}>создать пост</MyButton>
   </form>
 <PostList posts={posts} title="Посты про JS"/>
