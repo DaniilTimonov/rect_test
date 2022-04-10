@@ -20,13 +20,15 @@ const [posts2, setPosts2] = useState([
   {id:3, title:'Python 3', body:'Description'},
  ])
 
-const [title, setTitle] = useState('' )
-const [body, setBody] = useState('' )
+const [post, setPost] = useState({title:'', body:''} )
+
 
 
 const addNewPost = (e) => {
   e.preventDefault();
-     console.log(title);
+
+ setPosts([...posts, {...post, id: Date.now()}]);
+ setPost({title:'', body:''})
      
 }
 
@@ -37,14 +39,14 @@ const addNewPost = (e) => {
     {/*Управляемый компонент*/}
     <MyInput
 
-    value={title}
-    onChange = {e => setTitle(e.target.value)}
+    value={post.title}
+    onChange = {e => setPost( { ...post , title: e.target.value} )}
     type="text" placeholder="Название поста"/>
 
   {/* неуправляемый неконтроллируемый компонент */}
 {    <MyInput
-     value={title}
-     onChange = {e => setTitle(e.target.value)}
+     value={post.body}
+     onChange = {e => setPost( { ...post , body: e.target.value} )}
      type="text"
       placeholder="Описание поста"/> }
     <MyButton onClick = {addNewPost}>создать пост</MyButton>
