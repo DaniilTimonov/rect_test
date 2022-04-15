@@ -20,6 +20,9 @@ const [posts, setPosts] = useState([
 ])
 
 const [selectedSort, setSelectedSort] = useState('')
+const [searchQuery, setSearchQuery] = useState('')
+
+
 const createPost = (newPost) => {
   setPosts (   [...posts, newPost])
 }
@@ -42,6 +45,12 @@ return (
 <PostForm create = {createPost} />
 <hr style = {{margin:'20px 0'}}/>
 <div>
+<MyInput
+  value = {searchQuery}
+  onChange = {e => setSearchQuery(e.target.value)}
+  placeholder="Поиск..."
+
+/>
 <MySelect
   value = {selectedSort}
   onChange = {sortPosts}
