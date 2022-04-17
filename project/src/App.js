@@ -31,7 +31,7 @@ const sortedPosts = useMemo( () => {
 }, [selectedSort, posts])
 
 const sortedAndSearchedPosts = useMemo(() => {
- return sortedPosts.filter(post => post.title.includes(searchQuery))
+ return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
 }, [searchQuery, sortedPosts] )
 
 const createPost = (newPost) => {
@@ -72,7 +72,7 @@ return (
   ]}
 />
 </div>
-{posts.length !== 0
+{sortedAndSearchedPosts.length 
 ? <PostList remove={removePost}   posts={sortedAndSearchedPosts} title="Посты про JS"/>
 
 : <h1 style={{textAlign: 'center'}}> 
