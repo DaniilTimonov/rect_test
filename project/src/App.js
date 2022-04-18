@@ -54,7 +54,7 @@ const removePost = (post) => {
 
 return (
     <div className="App">
-      <MyButton onClick={() => setModal(true) }>
+      <MyButton style={{marginTop: 50}} onClick={() => setModal(true) }>
         создать пользователя
       </MyButton>
 <Mymodal visible={modal} setVisible = {setModal} >
