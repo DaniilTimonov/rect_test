@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import ClassCounter from './components/ClassCounter';
 import Counter from './components/counter';
 import './styles/App.css';
@@ -19,13 +19,17 @@ import axios from 'axios';
 
 
 
+
+
 function App() {
 const [posts, setPosts] = useState(   [])
 const [filter, setfilter] = useState ({ sort: '', query: '' })
 const [modal, setModal] = useState(false);
 const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
-
+useEffect(()=> {
+console.log('use effect')
+},[] )
 
 const createPost = (newPost) => {
   setPosts (   [...posts, newPost])
@@ -33,7 +37,7 @@ const createPost = (newPost) => {
 }
 async function fetchPosts(){
   const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  console.log(response.data);
+  setPosts(response.data);
 }
 
 // Получаем post из дочернего компонента

@@ -18,7 +18,7 @@
     border: 2px solid teal;
     margin-top: 15px;
     justify-content: space-between;
-    align-posts: center;
+    align-items: center;
 }
 .post-enter {
     transform: translateX(-350px);
