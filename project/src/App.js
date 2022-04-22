@@ -13,9 +13,12 @@ import PostFilter from './components/PostFilter';
 import Mymodal from './components/UI/MyModal/Mymodal';
 import { usePosts } from './hooks/usePosts';
 import axios from 'axios';
-import PostService from './API/PostService';
-import Loader from './components/UI/Loader/Loader';
-import { useFetching } from './hooks/useFetching';
+
+
+
+
+
+
 
 
 function App() {
@@ -23,13 +26,9 @@ const [posts, setPosts] = useState(   [])
 const [filter, setfilter] = useState ({ sort: '', query: '' })
 const [modal, setModal] = useState(false);
 const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-const [] = useFetching(  async() => {
-  const posts = await PostService.getAll();
-  setPosts(posts);
-} )
 
 useEffect(()=> {
-fetchPosts()
+console.log('use effect')
 },[] )
 
 const createPost = (newPost) => {
@@ -37,20 +36,13 @@ const createPost = (newPost) => {
   setModal(false)
 }
 async function fetchPosts(){
-  setIsPostsLoading(true);
-  setTimeout( async () => {
-
-    setIsPostsLoading(false);
-
-  }, 1000)
- 
-
-
+  const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+  setPosts(response.data);
 }
 
 // Получаем post из дочернего компонента
 const removePost = (post) => {
-setPosts(posts.filter(p => p.id !== post.id))
+ setPosts(posts.filter(p => p.id !== post.id))
  
 }
 
@@ -70,15 +62,10 @@ return (
 <PostFilter
   filter = {filter}
   setFilter = {setfilter}
-/>
-{isPostsLoading
-? <div style={{display: 'flex',justifyContent:'center', marginTop : 50}}> <Loader /> </div>
-: <PostList remove={removePost}  posts={sortedAndSearchedPosts} title="Посты про JS"/>
 
-}
- 
+/>
+ <PostList remove={removePost}   posts={sortedAndSearchedPosts} title="Посты про JS"/>
 </div>
  );
 }
 export default App;
-
