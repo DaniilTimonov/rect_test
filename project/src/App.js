@@ -16,7 +16,7 @@ import axios from 'axios';
 import PostService from './API/PostService';
 import Loader from './components/UI/Loader/Loader';
 import { useFetching } from './hooks/useFetching';
-import { getPageCount } from './utils/pages';
+import { getPageCount, getPagesArray } from './utils/pages';
 
 
 
@@ -33,6 +33,10 @@ const [totalPages, setTotalPages] = useState(0);
 const [limit, setLimit] = useState(  10);
 const [page, setPage] = useState(  1);
 const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+let pagesArray = getPagesArray(totalPages);
+
+
+
 const [fetchPosts, isPostsLoading, postError ] = useFetching ( async () => {
   const response = await PostService.getAll(limit, page);
   setPosts(response.data);
@@ -40,7 +44,7 @@ const [fetchPosts, isPostsLoading, postError ] = useFetching ( async () => {
   setTotalPages(getPageCount(totalCount, limit) );
 }  )
 
-console.log(totalPages)
+
 useEffect(()=> {
   fetchPosts()
 },[] )
@@ -82,9 +86,17 @@ return (
 {isPostsLoading
  ? <div style={{display:'flex', justifyContent:'center', marginTop : 50}}  > <Loader /> </div>
  : <PostList remove={removePost}   posts={sortedAndSearchedPosts} title="Посты про JS"/>
-
 }
- 
+<div className="page__wrapper" >
+{pagesArray.map
+(p =>
+<span className="page">{p}</span>)}
+
+</div>
+
+
+
+
 </div>
  );
 }
