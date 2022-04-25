@@ -88,9 +88,14 @@ return (
  : <PostList remove={removePost}   posts={sortedAndSearchedPosts} title="Посты про JS"/>
 }
 <div className="page__wrapper" >
-{pagesArray.map
-(p =>
-<span className="page">{p}</span>)}
+{pagesArray.map(p =>
+<span 
+onclick={() => setPage(p)}
+key={p} 
+className={page === p ? 'page page__current' : 'page'}
+>
+  {p}   </span>
+)}
 
 </div>
 
